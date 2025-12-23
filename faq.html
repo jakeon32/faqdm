@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>고객센터 - 버스라인</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@100;400;700;900&display=swap');
+
+    body {
+      font-family: 'Pretendard', sans-serif;
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    .highlight-text {
+      background: linear-gradient(120deg, #6366f1 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 900;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+
+    .faq-answer.active {
+      /* max-height is handled by JS for smooth animation */
+    }
+
+    .theme-toggle {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 100;
+      width: 64px;
+      height: 64px;
+      border-radius: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category-btn.active {
+      color: #ffffff !important;
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased">
+
+  <!-- Hero Section -->
+  <!-- Hero Section -->
+  <div class="relative w-full h-[350px] md:h-[450px] overflow-hidden group">
+    <!-- Background Image -->
+    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-[2000ms] group-hover:scale-[1.02]"
+      style="background-image: url('images/Faq02.png');">
+    </div>
+
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/20 to-slate-50 dark:to-slate-950">
+    </div>
+
+    <!-- Content -->
+    <div class="relative h-full flex flex-col items-center justify-center text-center px-4 pt-4">
+      <h1 class="text-6xl md:text-8xl font-black mb-6 tracking-tighter text-white drop-shadow-2xl">
+        <span
+          class="text-transparent bg-clip-text bg-gradient-to-tr from-indigo-200 via-white to-indigo-100">고객</span>센터
+      </h1>
+
+      <p
+        class="text-lg md:text-2xl text-slate-100 max-w-2xl mx-auto leading-relaxed font-medium drop-shadow-lg opacity-90">
+        무엇을 도와드릴까요?<br />
+        <span class="text-sm md:text-base opacity-75 font-light mt-2 block">빠르고 정확한 답변을 확인해보세요</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-6 -mt-16 relative z-10 pb-16">
+
+    <!-- Tab Navigation -->
+    <div
+      class="bg-white dark:bg-slate-900 p-1.5 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 mb-12 backdrop-blur-sm bg-white/90 dark:bg-slate-900/90">
+      <div class="grid grid-cols-2 gap-1">
+        <button onclick="switchTab('faq')" id="faqTab"
+          class="tab-btn py-3 md:py-4 rounded-xl text-lg font-bold transition-all duration-300 flex items-center justify-center gap-2 text-white bg-indigo-600 shadow-lg shadow-indigo-500/30 ring-1 ring-black/5">
+          <i class="fas fa-question-circle text-lg"></i>
+          FAQ
+        </button>
+        <button onclick="switchTab('inquiry')" id="inquiryTab"
+          class="tab-btn py-3 md:py-4 rounded-xl text-lg font-bold transition-all duration-300 flex items-center justify-center gap-2 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-700 dark:hover:text-slate-200">
+          <i class="fas fa-envelope text-lg"></i>
+          문의하기
+        </button>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <section id="faqSection" class="space-y-4">
+      <h2 class="text-3xl font-black mb-8 flex items-center gap-3">
+        <div class="w-12 h-12 bg-indigo-50 dark:bg-indigo-900/30 rounded-2xl flex items-center justify-center">
+          <i class="fas fa-lightbulb text-xl text-indigo-600 dark:text-indigo-400"></i>
+        </div>
+        자주 묻는 질문
+      </h2>
+
+      <!-- Category Filter Pills -->
+      <div class="mb-8 -mx-6 px-6 overflow-x-auto scrollbar-hide">
+        <div
+          class="flex gap-2 pb-2 min-w-max relative rounded-full bg-slate-100 dark:bg-slate-800/50 p-1.5 backdrop-blur-sm mx-1"
+          id="categoryContainer">
+          <!-- Sliding Pill -->
+          <div id="categoryPill"
+            class="absolute top-1.5 bottom-1.5 bg-indigo-600 rounded-full shadow-md transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] z-0">
+          </div>
+
+          <button onclick="filterCategory(this, 'all')" data-category="all"
+            class="category-btn relative z-10 px-6 py-2.5 rounded-full text-sm font-bold transition-colors duration-300 whitespace-nowrap text-white">
+            <i class="fas fa-list mr-1.5"></i>전체
+          </button>
+          <button onclick="filterCategory(this, 'reservation')" data-category="reservation"
+            class="category-btn relative z-10 px-6 py-2.5 rounded-full text-sm font-bold transition-colors duration-300 whitespace-nowrap text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
+            <i class="fas fa-ticket-alt mr-1.5"></i>예약/취소
+          </button>
+          <button onclick="filterCategory(this, 'refund')" data-category="refund"
+            class="category-btn relative z-10 px-6 py-2.5 rounded-full text-sm font-bold transition-colors duration-300 whitespace-nowrap text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
+            <i class="fas fa-credit-card mr-1.5"></i>환불/결제
+          </button>
+          <button onclick="filterCategory(this, 'qr')" data-category="qr"
+            class="category-btn relative z-10 px-6 py-2.5 rounded-full text-sm font-bold transition-colors duration-300 whitespace-nowrap text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
+            <i class="fas fa-qrcode mr-1.5"></i>QR/티켓
+          </button>
+          <button onclick="filterCategory(this, 'operation')" data-category="operation"
+            class="category-btn relative z-10 px-6 py-2.5 rounded-full text-sm font-bold transition-colors duration-300 whitespace-nowrap text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
+            <i class="fas fa-bus mr-1.5"></i>운행정보
+          </button>
+        </div>
+      </div>
+
+      <div id="faqListContainer"
+        class="transition-[height] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden">
+        <div class="space-y-3 p-1" id="faqList">
+          <div
+            class="faq-item bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
+            data-category="reservation">
+            <button
+              class="faq-question w-full px-6 md:px-8 py-5 md:py-6 text-left flex justify-between items-center gap-4"
+              onclick="toggleFaq(this)">
+              <div class="flex items-start gap-3 flex-1">
+                <div
+                  class="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center flex-shrink-0 mt-1">
+                  <span class="text-indigo-600 dark:text-indigo-400 font-black text-sm">Q</span>
+                </div>
+                <span class="font-bold text-base md:text-lg text-slate-800 dark:text-slate-100">환불가능한 정상취소 예약시간은 언제까지
+                  인가요?</span>
+              </div>
+              <i class="fas fa-chevron-down text-indigo-600 dark:text-indigo-400 transition-transform duration-300"></i>
+            </button>
+            <div class="faq-answer px-6 md:px-8 pb-0">
+              <div class="pl-11 pr-8 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed">
+                100% 환불 가능시간은 이용전일 16시 까지 입니다.
+                16시 이후에는 취소 불가하며 이용하지 않으셔도 환불되지 않습니다.
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="faq-item bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
+            data-category="qr">
+            <button
+              class="faq-question w-full px-6 md:px-8 py-5 md:py-6 text-left flex justify-between items-center gap-4"
+              onclick="toggleFaq(this)">
+              <div class="flex items-start gap-3 flex-1">
+                <div
+                  class="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center flex-shrink-0 mt-1">
+                  <span class="text-indigo-600 dark:text-indigo-400 font-black text-sm">Q</span>
+                </div>
+                <span class="font-bold text-base md:text-lg text-slate-800 dark:text-slate-100">예약하고 받은 문자메세지에 QR 코드가
+                  깨져서
+                  왔어요</span>
+              </div>
+              <i class="fas fa-chevron-down text-indigo-600 dark:text-indigo-400 transition-transform duration-300"></i>
+            </button>
+            <div class="faq-answer px-6 md:px-8 pb-0">
+              <div class="pl-11 pr-8 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed">
+                취소하지 않았는데 QR 코드가 깨져서 온 경우 전화문의바랍니다.
+                031-765-7965
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="faq-item bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
+            data-category="refund">
+            <button
+              class="faq-question w-full px-6 md:px-8 py-5 md:py-6 text-left flex justify-between items-center gap-4"
+              onclick="toggleFaq(this)">
+              <div class="flex items-start gap-3 flex-1">
+                <div
+                  class="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center flex-shrink-0 mt-1">
+                  <span class="text-indigo-600 dark:text-indigo-400 font-black text-sm">Q</span>
+                </div>
+                <span class="font-bold text-base md:text-lg text-slate-800 dark:text-slate-100">예약 취소요청했는데 환불이 바로
+                  안돼나요?</span>
+              </div>
+              <i class="fas fa-chevron-down text-indigo-600 dark:text-indigo-400 transition-transform duration-300"></i>
+            </button>
+            <div class="faq-answer px-6 md:px-8 pb-0">
+              <div class="pl-11 pr-8 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed">
+                은행영업일 기준 카드승인취소가 3일 ~5일 정도 소요됩니다.
+                정상취소요청 하신고객분 순서대로 환불조치해 드립니다.
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="faq-item bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
+            data-category="reservation">
+            <button
+              class="faq-question w-full px-6 md:px-8 py-5 md:py-6 text-left flex justify-between items-center gap-4"
+              onclick="toggleFaq(this)">
+              <div class="flex items-start gap-3 flex-1">
+                <div
+                  class="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center flex-shrink-0 mt-1">
+                  <span class="text-indigo-600 dark:text-indigo-400 font-black text-sm">Q</span>
+                </div>
+                <span class="font-bold text-base md:text-lg text-slate-800 dark:text-slate-100">예약인원 부분 취소 가능한가요</span>
+              </div>
+              <i class="fas fa-chevron-down text-indigo-600 dark:text-indigo-400 transition-transform duration-300"></i>
+            </button>
+            <div class="faq-answer px-6 md:px-8 pb-0">
+              <div class="pl-11 pr-8 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed">
+                예약인원 변경시 예약취소 후 다시 예약하셔야 합니다.
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="faq-item bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
+            data-category="reservation">
+            <button
+              class="faq-question w-full px-6 md:px-8 py-5 md:py-6 text-left flex justify-between items-center gap-4"
+              onclick="toggleFaq(this)">
+              <div class="flex items-start gap-3 flex-1">
+                <div
+                  class="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center flex-shrink-0 mt-1">
+                  <span class="text-indigo-600 dark:text-indigo-400 font-black text-sm">Q</span>
+                </div>
+                <span class="font-bold text-base md:text-lg text-slate-800 dark:text-slate-100">왕복예약 후 정상취소 가능시간 안에 편도만
+                  취소가능한가요?</span>
+              </div>
+              <i class="fas fa-chevron-down text-indigo-600 dark:text-indigo-400 transition-transform duration-300"></i>
+            </button>
+            <div class="faq-answer px-6 md:px-8 pb-0">
+              <div class="pl-11 pr-8 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed">
+                정상취소 가능시간안에는 편도만 부분취소 가능합니다.
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="faq-item bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
+            data-category="operation">
+            <button
+              class="faq-question w-full px-6 md:px-8 py-5 md:py-6 text-left flex justify-between items-center gap-4"
+              onclick="toggleFaq(this)">
+              <div class="flex items-start gap-3 flex-1">
+                <div
+                  class="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center flex-shrink-0 mt-1">
+                  <span class="text-indigo-600 dark:text-indigo-400 font-black text-sm">Q</span>
+                </div>
+                <span class="font-bold text-base md:text-lg text-slate-800 dark:text-slate-100">스키강습시간 전에 버스가
+                  도착하나요?</span>
+              </div>
+              <i class="fas fa-chevron-down text-indigo-600 dark:text-indigo-400 transition-transform duration-300"></i>
+            </button>
+            <div class="faq-answer px-6 md:px-8 pb-0">
+              <div class="pl-11 pr-8 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed">
+                셔틀버스는 도착시간을 보장하지 않습니다. 강습시작 시간 이후 도착합니다.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Inquiry Section -->
+    <section id="inquirySection" class="hidden">
+      <h2 class="text-3xl font-black mb-8 flex items-center gap-3">
+        <div class="w-12 h-12 bg-indigo-50 dark:bg-indigo-900/30 rounded-2xl flex items-center justify-center">
+          <i class="fas fa-paper-plane text-xl text-indigo-600 dark:text-indigo-400"></i>
+        </div>
+        문의하기
+      </h2>
+
+      <form id="inquiryForm" onsubmit="handleSubmit(event)" class="space-y-6">
+        <div
+          class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 md:p-10 shadow-sm space-y-8">
+          <div>
+            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">
+              이름<span class="text-indigo-600">*</span>
+            </label>
+            <input type="text" id="name"
+              class="w-full px-5 py-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all"
+              placeholder="이름 입력" required>
+          </div>
+
+          <div>
+            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">
+              휴대폰번호<span class="text-indigo-600">*</span>
+            </label>
+            <input type="tel" id="phone"
+              class="w-full px-5 py-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all"
+              placeholder="숫자만 입력 (01012345678)" pattern="[0-9]{10,11}" required oninput="formatPhone(this)">
+          </div>
+
+          <div>
+            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">
+              답변 받을 이메일 주소<span class="text-indigo-600">*</span>
+            </label>
+            <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center">
+              <input type="text" id="emailId"
+                class="flex-1 px-5 py-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all"
+                placeholder="이메일 아이디" required>
+              <span class="hidden md:block text-slate-400">@</span>
+              <select id="emailDomain" onchange="handleDomainChange()"
+                class="flex-1 px-5 py-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all cursor-pointer"
+                required>
+                <option value="">선택</option>
+                <option value="naver.com">naver.com</option>
+                <option value="gmail.com">gmail.com</option>
+                <option value="nate.com">nate.com</option>
+                <option value="daum.net">daum.net</option>
+                <option value="hanmail.net">hanmail.net</option>
+                <option value="custom">직접입력</option>
+              </select>
+              <input type="text" id="customDomain"
+                class="flex-1 px-5 py-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all hidden"
+                placeholder="도메인 입력" required>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">
+              제목<span class="text-indigo-600">*</span>
+            </label>
+            <input type="text" id="title"
+              class="w-full px-5 py-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all"
+              placeholder="제목을 입력해 주세요." required oninput="updateByteCount('title', 50)">
+            <div class="text-right mt-2 text-xs font-bold text-slate-400" id="titleCounter">0/50 byte</div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">
+              문의 내용<span class="text-indigo-600">*</span>
+            </label>
+            <textarea id="content"
+              class="w-full px-5 py-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all min-h-[180px] resize-vertical"
+              placeholder="문의하실 내용을 입력해 주세요." required oninput="updateByteCount('content', 5000)"></textarea>
+            <div class="text-right mt-2 text-xs font-bold text-slate-400" id="contentCounter">0/5000 byte</div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">첨부 파일</label>
+            <input type="file" id="fileInput" class="hidden" onchange="handleFileUpload(event)" accept="*">
+            <button type="button" id="uploadBtn" onclick="document.getElementById('fileInput').click()"
+              class="px-6 py-3 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-bold text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+              <i class="fas fa-upload mr-2"></i>업로드
+            </button>
+            <div id="fileInfo"
+              class="mt-4 hidden p-4 rounded-2xl bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800 flex items-center justify-between">
+              <span id="fileName" class="text-sm text-indigo-700 dark:text-indigo-300 font-medium"></span>
+              <button type="button" onclick="removeFile()"
+                class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-200 font-bold">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+            <p class="mt-3 text-xs text-slate-500 dark:text-slate-400">사진 및 파일은 최대 1개까지 등록 가능 (10MB이하)</p>
+          </div>
+        </div>
+
+        <button type="submit" id="submitBtn" disabled
+          class="w-full py-5 rounded-2xl bg-indigo-600 text-white font-black text-lg hover:bg-indigo-700 disabled:bg-slate-300 dark:disabled:bg-slate-700 disabled:cursor-not-allowed transition-all shadow-lg shadow-indigo-500/30 hover:shadow-xl hover:shadow-indigo-500/40">
+          문의하기
+        </button>
+      </form>
+    </section>
+
+  </div>
+
+  <!-- Theme Toggle Floating Button -->
+  <div class="theme-toggle bg-indigo-600 dark:bg-indigo-500 text-white shadow-indigo-500/40" id="themeBtn">
+    <i class="fas fa-moon text-2xl" id="themeIcon"></i>
+  </div>
+
+  <script>
+    let uploadedFile = null;
+
+    // Theme Toggle
+    const btn = document.getElementById('themeBtn');
+    const icon = document.getElementById('themeIcon');
+    const html = document.documentElement;
+
+    btn.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      if (html.classList.contains('dark')) {
+        icon.classList.replace('fa-moon', 'fa-sun');
+      } else {
+        icon.classList.replace('fa-sun', 'fa-moon');
+      }
+    });
+
+    // Detect System Preference
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      html.classList.add('dark');
+      icon.classList.replace('fa-moon', 'fa-sun');
+    }
+
+    // Tab Switching
+    function switchTab(tab) {
+      const faqSection = document.getElementById('faqSection');
+      const inquirySection = document.getElementById('inquirySection');
+      const faqTab = document.getElementById('faqTab');
+      const inquiryTab = document.getElementById('inquiryTab');
+
+      const activeClasses = ['bg-indigo-600', 'text-white', 'shadow-lg', 'shadow-indigo-500/30', 'ring-1', 'ring-black/5'];
+      const inactiveClasses = ['text-slate-500', 'dark:text-slate-400', 'hover:bg-slate-50', 'dark:hover:bg-slate-800', 'hover:text-slate-700', 'dark:hover:text-slate-200'];
+
+      if (tab === 'faq') {
+        faqSection.classList.remove('hidden');
+        inquirySection.classList.add('hidden');
+
+        faqTab.classList.add(...activeClasses);
+        faqTab.classList.remove(...inactiveClasses);
+        // Ensure initial shadow-md is removed if present from hardcoded HTML
+        faqTab.classList.remove('shadow-md', 'shadow-indigo-500/20');
+
+        inquiryTab.classList.remove(...activeClasses);
+        inquiryTab.classList.remove('shadow-md', 'shadow-indigo-500/20'); // Safety removal
+        inquiryTab.classList.add(...inactiveClasses);
+      } else {
+        faqSection.classList.add('hidden');
+        inquirySection.classList.remove('hidden');
+
+        inquiryTab.classList.add(...activeClasses);
+        inquiryTab.classList.remove(...inactiveClasses);
+        // Ensure initial shadow-md is removed
+        inquiryTab.classList.remove('shadow-md', 'shadow-indigo-500/20');
+
+        faqTab.classList.remove(...activeClasses);
+        faqTab.classList.remove('shadow-md', 'shadow-indigo-500/20'); // Remove potential initial shadow
+        faqTab.classList.add(...inactiveClasses);
+      }
+    }
+
+    // Category Filter & Smooth Transition
+    function filterCategory(btn, category) {
+      if (!btn) return;
+
+      // 1. Animate Pill
+      const container = document.getElementById('categoryContainer');
+      const pill = document.getElementById('categoryPill');
+      const allBtns = document.querySelectorAll('.category-btn');
+
+      // Update pill position
+      pill.style.width = `${btn.offsetWidth}px`;
+      pill.style.left = `${btn.offsetLeft}px`;
+
+      // Update text colors
+      allBtns.forEach(b => {
+        b.classList.remove('active');
+        b.classList.remove('text-white');
+        b.classList.add('text-slate-500', 'dark:text-slate-400');
+      });
+      btn.classList.remove('text-slate-500', 'dark:text-slate-400');
+      btn.classList.add('active'); // Use active class for enforcement
+      btn.classList.add('text-white');
+
+      // 2. Filter Content with Smooth Height Transition
+      const faqListContainer = document.getElementById('faqListContainer');
+      const faqList = document.getElementById('faqList');
+      const faqItems = document.querySelectorAll('.faq-item');
+
+      // Get current height
+      const startHeight = faqListContainer.offsetHeight;
+      faqListContainer.style.height = `${startHeight}px`;
+
+      // Filter items (change display)
+      faqItems.forEach(item => {
+        if (category === 'all' || item.dataset.category === category) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      // Calculate new height
+      // Force reflow to ensure browser calculates new layout
+      void faqList.offsetHeight;
+      const endHeight = faqList.offsetHeight;
+
+      // Animate to new height
+      requestAnimationFrame(() => {
+        faqListContainer.style.height = `${endHeight}px`;
+      });
+
+      // Clean up after transition
+      const transitionEndHandler = () => {
+        faqListContainer.style.height = 'auto';
+        faqListContainer.removeEventListener('transitionend', transitionEndHandler);
+      };
+      faqListContainer.addEventListener('transitionend', transitionEndHandler);
+    }
+
+    // Initialize Pill Position
+    window.addEventListener('load', () => {
+      const firstBtn = document.querySelector('.category-btn');
+      if (firstBtn) {
+        filterCategory(firstBtn, 'all');
+      }
+    });
+
+    // FAQ Accordion
+    function toggleFaq(button) {
+      const answer = button.nextElementSibling;
+      const icon = button.querySelector('i');
+      const wasActive = answer.classList.contains('active');
+
+      // 1. Close all active FAQs (Simultaneous)
+      document.querySelectorAll('.faq-answer.active').forEach(a => {
+        a.style.maxHeight = '0px';
+        a.classList.remove('active');
+      });
+      document.querySelectorAll('.faq-question i.rotate-180').forEach(i => {
+        i.classList.remove('rotate-180');
+      });
+
+      // 2. Open clicked FAQ if it wasn't active
+      if (!wasActive) {
+        answer.classList.add('active');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        icon.classList.add('rotate-180');
+      }
+    }
+
+    // Phone number formatting
+    function formatPhone(input) {
+      input.value = input.value.replace(/[^0-9]/g, '');
+      validateForm();
+    }
+
+    // Email domain handling
+    function handleDomainChange() {
+      const select = document.getElementById('emailDomain');
+      const customInput = document.getElementById('customDomain');
+
+      if (select.value === 'custom') {
+        select.classList.add('hidden');
+        customInput.classList.remove('hidden');
+        customInput.required = true;
+        select.required = false;
+      } else {
+        customInput.classList.add('hidden');
+        customInput.required = false;
+        select.required = true;
+      }
+      validateForm();
+    }
+
+    // Byte calculation
+    function getByteLength(str) {
+      let byte = 0;
+      for (let i = 0; i < str.length; i++) {
+        byte += str.charCodeAt(i) > 127 ? 2 : 1;
+      }
+      return byte;
+    }
+
+    // Byte counter update
+    function updateByteCount(fieldId, maxByte) {
+      const input = document.getElementById(fieldId);
+      const counter = document.getElementById(fieldId + 'Counter');
+      const currentByte = getByteLength(input.value);
+
+      counter.textContent = `${currentByte}/${maxByte} byte`;
+
+      if (currentByte > maxByte) {
+        counter.classList.add('text-red-500');
+        counter.classList.remove('text-slate-400');
+        while (getByteLength(input.value) > maxByte) {
+          input.value = input.value.slice(0, -1);
+        }
+        counter.textContent = `${getByteLength(input.value)}/${maxByte} byte`;
+      } else {
+        counter.classList.remove('text-red-500');
+        counter.classList.add('text-slate-400');
+      }
+
+      validateForm();
+    }
+
+    // File upload
+    function handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const maxSize = 10 * 1024 * 1024; // 10MB
+      if (file.size > maxSize) {
+        alert('파일 크기는 10MB 이하만 가능합니다.');
+        event.target.value = '';
+        return;
+      }
+
+      uploadedFile = file;
+      const sizeKB = Math.round(file.size / 1024);
+      document.getElementById('fileName').textContent = `${file.name} (${sizeKB}KB)`;
+      document.getElementById('fileInfo').classList.remove('hidden');
+      document.getElementById('uploadBtn').classList.add('hidden');
+    }
+
+    // Remove file
+    function removeFile() {
+      uploadedFile = null;
+      document.getElementById('fileInput').value = '';
+      document.getElementById('fileInfo').classList.add('hidden');
+      document.getElementById('uploadBtn').classList.remove('hidden');
+    }
+
+    // Form validation
+    function validateForm() {
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const emailId = document.getElementById('emailId').value.trim();
+      const emailDomain = document.getElementById('emailDomain').value;
+      const customDomain = document.getElementById('customDomain').value.trim();
+      const title = document.getElementById('title').value.trim();
+      const content = document.getElementById('content').value.trim();
+
+      const isEmailValid = emailId &&
+        (emailDomain && emailDomain !== 'custom' && emailDomain !== '') ||
+        (emailDomain === 'custom' && customDomain);
+
+      const isValid = name &&
+        phone.length >= 10 && phone.length <= 11 &&
+        isEmailValid &&
+        title && getByteLength(title) <= 50 &&
+        content && getByteLength(content) <= 5000;
+
+      document.getElementById('submitBtn').disabled = !isValid;
+    }
+
+    // Add event listeners
+    document.getElementById('name').addEventListener('input', validateForm);
+    document.getElementById('emailId').addEventListener('input', validateForm);
+    document.getElementById('customDomain').addEventListener('input', validateForm);
+
+    // Form submission
+    function handleSubmit(event) {
+      event.preventDefault();
+
+      const emailDomain = document.getElementById('emailDomain').value === 'custom'
+        ? document.getElementById('customDomain').value
+        : document.getElementById('emailDomain').value;
+
+      const formData = {
+        name: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        email: `${document.getElementById('emailId').value}@${emailDomain}`,
+        title: document.getElementById('title').value,
+        content: document.getElementById('content').value,
+        file: uploadedFile ? uploadedFile.name : null
+      };
+
+      console.log('문의 내용:', formData);
+      alert('문의가 접수되었습니다.\n빠른 시일 내에 답변 드리겠습니다.');
+
+      // Reset form
+      document.getElementById('inquiryForm').reset();
+      removeFile();
+      document.getElementById('titleCounter').textContent = '0/50 byte';
+      document.getElementById('contentCounter').textContent = '0/5000 byte';
+      validateForm();
+    }
+  </script>
+</body>
+
+</html>
