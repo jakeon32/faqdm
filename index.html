@@ -158,6 +158,54 @@
       <div id="faqListContainer"
         class="transition-[height] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden">
         <div class="space-y-3 p-1" id="faqList">
+
+          <!-- Reservation Items -->
+          <div
+            class="faq-item bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
+            data-category="reservation">
+            <button
+              class="faq-question w-full px-4 md:px-8 py-5 md:py-6 text-left flex justify-between items-center gap-4"
+              onclick="toggleFaq(this)">
+              <div class="flex items-start gap-3 flex-1">
+                <div
+                  class="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center flex-shrink-0 mt-1">
+                  <span class="text-indigo-600 dark:text-indigo-400 font-black text-sm">Q</span>
+                </div>
+                <span class="font-bold text-base md:text-lg text-slate-800 dark:text-slate-100">편도만 예약 가능한가요?</span>
+              </div>
+              <i class="fas fa-chevron-down text-indigo-600 dark:text-indigo-400 transition-transform duration-300"></i>
+            </button>
+            <div class="faq-answer px-4 md:px-8 pb-0">
+              <div class="pl-11 pr-8 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed">
+                편도만 예약하실 수 없습니다. 왕복으로 예약 해주셔야 합니다.
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="faq-item bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
+            data-category="reservation">
+            <button
+              class="faq-question w-full px-4 md:px-8 py-5 md:py-6 text-left flex justify-between items-center gap-4"
+              onclick="toggleFaq(this)">
+              <div class="flex items-start gap-3 flex-1">
+                <div
+                  class="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center flex-shrink-0 mt-1">
+                  <span class="text-indigo-600 dark:text-indigo-400 font-black text-sm">Q</span>
+                </div>
+                <span class="font-bold text-base md:text-lg text-slate-800 dark:text-slate-100">동행자의 티켓도 같이 구매할 수
+                  있나요?</span>
+              </div>
+              <i class="fas fa-chevron-down text-indigo-600 dark:text-indigo-400 transition-transform duration-300"></i>
+            </button>
+            <div class="faq-answer px-4 md:px-8 pb-0">
+              <div class="pl-11 pr-8 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed">
+                네, 동행인 티켓도 같이 예약하시면 됩니다.
+              </div>
+            </div>
+          </div>
+
+          <!-- Refund Items -->
           <div
             class="faq-item bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
             data-category="refund">
@@ -178,31 +226,6 @@
               <div class="pl-11 pr-8 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed">
                 100% 환불 가능시간은 이용전일 16시 까지 입니다.
                 16시 이후에는 취소 불가하며 이용하지 않으셔도 환불되지 않습니다.
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="faq-item bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
-            data-category="qr">
-            <button
-              class="faq-question w-full px-4 md:px-8 py-5 md:py-6 text-left flex justify-between items-center gap-4"
-              onclick="toggleFaq(this)">
-              <div class="flex items-start gap-3 flex-1">
-                <div
-                  class="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center flex-shrink-0 mt-1">
-                  <span class="text-indigo-600 dark:text-indigo-400 font-black text-sm">Q</span>
-                </div>
-                <span class="font-bold text-base md:text-lg text-slate-800 dark:text-slate-100">예약하고 받은 문자메세지에 QR 코드가
-                  깨져서
-                  왔어요</span>
-              </div>
-              <i class="fas fa-chevron-down text-indigo-600 dark:text-indigo-400 transition-transform duration-300"></i>
-            </button>
-            <div class="faq-answer px-4 md:px-8 pb-0">
-              <div class="pl-11 pr-8 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed">
-                취소하지 않았는데 QR 코드가 깨져서 온 경우 전화문의바랍니다.
-                031-765-7965
               </div>
             </div>
           </div>
@@ -276,6 +299,32 @@
             </div>
           </div>
 
+          <!-- QR Items -->
+          <div
+            class="faq-item bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
+            data-category="qr">
+            <button
+              class="faq-question w-full px-4 md:px-8 py-5 md:py-6 text-left flex justify-between items-center gap-4"
+              onclick="toggleFaq(this)">
+              <div class="flex items-start gap-3 flex-1">
+                <div
+                  class="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center flex-shrink-0 mt-1">
+                  <span class="text-indigo-600 dark:text-indigo-400 font-black text-sm">Q</span>
+                </div>
+                <span class="font-bold text-base md:text-lg text-slate-800 dark:text-slate-100">예약하고 받은 문자메세지에 QR 코드가
+                  깨져서 왔어요</span>
+              </div>
+              <i class="fas fa-chevron-down text-indigo-600 dark:text-indigo-400 transition-transform duration-300"></i>
+            </button>
+            <div class="faq-answer px-4 md:px-8 pb-0">
+              <div class="pl-11 pr-8 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed">
+                취소하지 않았는데 QR 코드가 깨져서 온 경우 전화문의바랍니다.
+                031-765-7965
+              </div>
+            </div>
+          </div>
+
+          <!-- Other Items -->
           <div
             class="faq-item bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
             data-category="other">
@@ -298,195 +347,151 @@
               </div>
             </div>
           </div>
+
         </div>
       </div>
 
-      <div
-        class="faq-item bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
-        data-category="reservation">
-        <button class="faq-question w-full px-4 md:px-8 py-5 md:py-6 text-left flex justify-between items-center gap-4"
-          onclick="toggleFaq(this)">
-          <div class="flex items-start gap-3 flex-1">
-            <div
-              class="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center flex-shrink-0 mt-1">
-              <span class="text-indigo-600 dark:text-indigo-400 font-black text-sm">Q</span>
-            </div>
-            <span class="font-bold text-base md:text-lg text-slate-800 dark:text-slate-100">편도만 예약 가능한가요?</span>
-          </div>
-          <i class="fas fa-chevron-down text-indigo-600 dark:text-indigo-400 transition-transform duration-300"></i>
+      <!-- Inquiry Button (Bottom) -->
+      <div class="mt-12 flex justify-center">
+        <button onclick="openModal()"
+          class="w-full md:w-auto min-w-[200px] group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-indigo-600 dark:bg-indigo-500 rounded-2xl md:rounded-full text-white font-bold shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:bg-indigo-700 dark:hover:bg-indigo-400 transition-all duration-300 transform hover:-translate-y-1">
+          <div class="absolute inset-0 rounded-2xl md:rounded-full border border-white/20"></div>
+          <i class="fas fa-envelope text-xl group-hover:scale-110 transition-transform duration-300"></i>
+          <span class="text-lg">1:1 문의하기</span>
         </button>
-        <div class="faq-answer px-4 md:px-8 pb-0">
-          <div class="pl-11 pr-8 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed">
-            편도만 예약하실 수 없습니다. 왕복으로 예약 해주셔야 합니다.
-          </div>
-        </div>
       </div>
+    </section>
 
-      <div
-        class="faq-item bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
-        data-category="reservation">
-        <button class="faq-question w-full px-4 md:px-8 py-5 md:py-6 text-left flex justify-between items-center gap-4"
-          onclick="toggleFaq(this)">
-          <div class="flex items-start gap-3 flex-1">
-            <div
-              class="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center flex-shrink-0 mt-1">
-              <span class="text-indigo-600 dark:text-indigo-400 font-black text-sm">Q</span>
-            </div>
-            <span class="font-bold text-base md:text-lg text-slate-800 dark:text-slate-100">동행자의 티켓도 같이 구매할 수
-              있나요?</span>
-          </div>
-          <i class="fas fa-chevron-down text-indigo-600 dark:text-indigo-400 transition-transform duration-300"></i>
-        </button>
-        <div class="faq-answer px-4 md:px-8 pb-0">
-          <div class="pl-11 pr-8 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed">
-            네, 동행인 티켓도 같이 예약하시면 됩니다.
-          </div>
-        </div>
-      </div>
-  </div>
-  </div>
+    <!-- Inquiry Modal -->
+    <div id="inquiryModal" class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-300"
+      aria-labelledby="modal-title" role="dialog" aria-modal="true">
+      <!-- Backdrop -->
+      <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
 
-  <!-- Inquiry Button (Bottom) -->
-  <div class="mt-12 flex justify-center">
-    <button onclick="openModal()"
-      class="w-full md:w-auto min-w-[200px] group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-indigo-600 dark:bg-indigo-500 rounded-2xl md:rounded-full text-white font-bold shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:bg-indigo-700 dark:hover:bg-indigo-400 transition-all duration-300 transform hover:-translate-y-1">
-      <div class="absolute inset-0 rounded-2xl md:rounded-full border border-white/20"></div>
-      <i class="fas fa-envelope text-xl group-hover:scale-110 transition-transform duration-300"></i>
-      <span class="text-lg">1:1 문의하기</span>
-    </button>
-  </div>
-  </section>
-
-  <!-- Inquiry Modal -->
-  <div id="inquiryModal" class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-300"
-    aria-labelledby="modal-title" role="dialog" aria-modal="true">
-    <!-- Backdrop -->
-    <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
-
-    <!-- Modal Panel -->
-    <div class="flex items-center justify-center min-h-screen p-4">
-      <div
-        class="relative w-full max-w-2xl bg-white dark:bg-slate-900 rounded-3xl shadow-2xl transform transition-all scale-95 opacity-0 max-h-[90vh] overflow-y-auto"
-        id="modalPanel">
-
-        <!-- Header -->
+      <!-- Modal Panel -->
+      <div class="flex items-center justify-center min-h-screen p-4">
         <div
-          class="sticky top-0 z-10 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
-          <h2 class="text-xl font-black text-slate-900 dark:text-white flex items-center gap-2">
-            <div class="w-8 h-8 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center">
-              <i class="fas fa-paper-plane text-indigo-600 dark:text-indigo-400 text-sm"></i>
-            </div>
-            1:1 문의하기
-          </h2>
-          <button onclick="closeModal()"
-            class="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
-            <i class="fas fa-times text-lg"></i>
-          </button>
-        </div>
+          class="relative w-full max-w-2xl bg-white dark:bg-slate-900 rounded-3xl shadow-2xl transform transition-all scale-95 opacity-0 max-h-[90vh] overflow-y-auto"
+          id="modalPanel">
 
-        <!-- Body -->
-        <div class="p-6 md:p-8">
-          <form id="inquiryForm" onsubmit="handleSubmit(event)" class="space-y-6">
-            <div class="space-y-6">
-              <div>
-                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
-                  이름<span class="text-indigo-600">*</span>
-                </label>
-                <input type="text" id="name"
-                  class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all placeholder:text-slate-400 text-sm"
-                  placeholder="이름 입력" required>
+          <!-- Header -->
+          <div
+            class="sticky top-0 z-10 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+            <h2 class="text-xl font-black text-slate-900 dark:text-white flex items-center gap-2">
+              <div class="w-8 h-8 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center">
+                <i class="fas fa-paper-plane text-indigo-600 dark:text-indigo-400 text-sm"></i>
               </div>
+              1:1 문의하기
+            </h2>
+            <button onclick="closeModal()"
+              class="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
+              <i class="fas fa-times text-lg"></i>
+            </button>
+          </div>
 
-              <div>
-                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
-                  휴대폰번호<span class="text-indigo-600">*</span>
-                </label>
-                <input type="tel" id="phone"
-                  class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all placeholder:text-slate-400 text-sm"
-                  placeholder="숫자만 입력 (01012345678)" pattern="[0-9]{10,11}" required oninput="formatPhone(this)">
-              </div>
-
-              <div>
-                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
-                  답변 받을 이메일 주소<span class="text-indigo-600">*</span>
-                </label>
-                <div class="flex flex-col md:flex-row gap-2 items-stretch md:items-center">
-                  <input type="text" id="emailId"
-                    class="flex-1 px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all placeholder:text-slate-400 text-sm"
-                    placeholder="이메일 아이디" required>
-                  <span class="hidden md:block text-slate-400 text-sm">@</span>
-                  <select id="emailDomain" onchange="handleDomainChange()"
-                    class="flex-1 px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all cursor-pointer text-sm"
-                    required>
-                    <option value="">선택</option>
-                    <option value="naver.com">naver.com</option>
-                    <option value="gmail.com">gmail.com</option>
-                    <option value="nate.com">nate.com</option>
-                    <option value="daum.net">daum.net</option>
-                    <option value="hanmail.net">hanmail.net</option>
-                    <option value="custom">직접입력</option>
-                  </select>
-                  <input type="text" id="customDomain"
-                    class="flex-1 px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all hidden text-sm"
-                    placeholder="도메인 입력" required>
+          <!-- Body -->
+          <div class="p-6 md:p-8">
+            <form id="inquiryForm" onsubmit="handleSubmit(event)" class="space-y-6">
+              <div class="space-y-6">
+                <div>
+                  <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
+                    이름<span class="text-indigo-600">*</span>
+                  </label>
+                  <input type="text" id="name"
+                    class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all placeholder:text-slate-400 text-sm"
+                    placeholder="이름 입력" required>
                 </div>
-              </div>
 
-              <div>
-                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
-                  제목<span class="text-indigo-600">*</span>
-                </label>
-                <input type="text" id="title"
-                  class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all placeholder:text-slate-400 text-sm"
-                  placeholder="제목을 입력해 주세요." required oninput="updateByteCount('title', 50)">
-                <div class="text-right mt-1.5 text-xs font-bold text-slate-400" id="titleCounter">0/50 byte</div>
-              </div>
+                <div>
+                  <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
+                    휴대폰번호<span class="text-indigo-600">*</span>
+                  </label>
+                  <input type="tel" id="phone"
+                    class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all placeholder:text-slate-400 text-sm"
+                    placeholder="숫자만 입력 (01012345678)" pattern="[0-9]{10,11}" required oninput="formatPhone(this)">
+                </div>
 
-              <div>
-                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
-                  문의 내용<span class="text-indigo-600">*</span>
-                </label>
-                <textarea id="content"
-                  class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all min-h-[150px] resize-vertical placeholder:text-slate-400 text-sm"
-                  placeholder="문의하실 내용을 입력해 주세요." required oninput="updateByteCount('content', 5000)"></textarea>
-                <div class="text-right mt-1.5 text-xs font-bold text-slate-400" id="contentCounter">0/5000 byte</div>
-              </div>
-
-              <div>
-                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">첨부 파일</label>
-                <input type="file" id="fileInput" class="hidden" onchange="handleFileUpload(event)" accept="*">
-                <button type="button" id="uploadBtn" onclick="document.getElementById('fileInput').click()"
-                  class="w-full border-2 border-dashed border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 font-bold text-sm py-8 rounded-xl hover:border-indigo-500 dark:hover:border-indigo-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/10 transition-all flex flex-col items-center justify-center gap-2 group">
-                  <div
-                    class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/50 flex items-center justify-center transition-colors">
-                    <i class="fas fa-cloud-upload-alt text-lg group-hover:scale-110 transition-transform"></i>
+                <div>
+                  <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
+                    답변 받을 이메일 주소<span class="text-indigo-600">*</span>
+                  </label>
+                  <div class="flex flex-col md:flex-row gap-2 items-stretch md:items-center">
+                    <input type="text" id="emailId"
+                      class="flex-1 px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all placeholder:text-slate-400 text-sm"
+                      placeholder="이메일 아이디" required>
+                    <span class="hidden md:block text-slate-400 text-sm">@</span>
+                    <select id="emailDomain" onchange="handleDomainChange()"
+                      class="flex-1 px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all cursor-pointer text-sm"
+                      required>
+                      <option value="">선택</option>
+                      <option value="naver.com">naver.com</option>
+                      <option value="gmail.com">gmail.com</option>
+                      <option value="nate.com">nate.com</option>
+                      <option value="daum.net">daum.net</option>
+                      <option value="hanmail.net">hanmail.net</option>
+                      <option value="custom">직접입력</option>
+                    </select>
+                    <input type="text" id="customDomain"
+                      class="flex-1 px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all hidden text-sm"
+                      placeholder="도메인 입력" required>
                   </div>
-                  <span>파일 업로드 (최대 10MB)</span>
-                </button>
-                <div id="fileInfo"
-                  class="mt-4 hidden p-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800 flex items-center justify-between">
-                  <span id="fileName"
-                    class="text-sm text-indigo-700 dark:text-indigo-300 font-medium truncate pr-4"></span>
-                  <button type="button" onclick="removeFile()"
-                    class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-200 font-bold p-1">
-                    <i class="fas fa-times"></i>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
+                    제목<span class="text-indigo-600">*</span>
+                  </label>
+                  <input type="text" id="title"
+                    class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all placeholder:text-slate-400 text-sm"
+                    placeholder="제목을 입력해 주세요." required oninput="updateByteCount('title', 50)">
+                  <div class="text-right mt-1.5 text-xs font-bold text-slate-400" id="titleCounter">0/50 byte</div>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
+                    문의 내용<span class="text-indigo-600">*</span>
+                  </label>
+                  <textarea id="content"
+                    class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all min-h-[150px] resize-vertical placeholder:text-slate-400 text-sm"
+                    placeholder="문의하실 내용을 입력해 주세요." required oninput="updateByteCount('content', 5000)"></textarea>
+                  <div class="text-right mt-1.5 text-xs font-bold text-slate-400" id="contentCounter">0/5000 byte</div>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">첨부 파일</label>
+                  <input type="file" id="fileInput" class="hidden" onchange="handleFileUpload(event)" accept="*">
+                  <button type="button" id="uploadBtn" onclick="document.getElementById('fileInput').click()"
+                    class="w-full border-2 border-dashed border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 font-bold text-sm py-8 rounded-xl hover:border-indigo-500 dark:hover:border-indigo-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/10 transition-all flex flex-col items-center justify-center gap-2 group">
+                    <div
+                      class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/50 flex items-center justify-center transition-colors">
+                      <i class="fas fa-cloud-upload-alt text-lg group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <span>파일 업로드 (최대 10MB)</span>
                   </button>
+                  <div id="fileInfo"
+                    class="mt-4 hidden p-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800 flex items-center justify-between">
+                    <span id="fileName"
+                      class="text-sm text-indigo-700 dark:text-indigo-300 font-medium truncate pr-4"></span>
+                    <button type="button" onclick="removeFile()"
+                      class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-200 font-bold p-1">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div
-              class="pt-4 border-t border-slate-100 dark:border-slate-800 sticky bottom-0 bg-white dark:bg-slate-900 -mx-6 md:-mx-8 px-6 md:px-8 pb-0 mt-8 mb-[-1.5rem]">
-              <button type="submit" id="submitBtn" disabled
-                class="w-full py-4 rounded-xl bg-indigo-600 text-white font-bold text-lg hover:bg-indigo-700 disabled:bg-slate-300 dark:disabled:bg-slate-700 disabled:cursor-not-allowed transition-all shadow-lg shadow-indigo-500/30 hover:shadow-xl hover:shadow-indigo-500/40 mb-6">
-                문의하기
-              </button>
-            </div>
-          </form>
+              <div
+                class="pt-4 border-t border-slate-100 dark:border-slate-800 sticky bottom-0 bg-white dark:bg-slate-900 -mx-6 md:-mx-8 px-6 md:px-8 pb-0 mt-8 mb-[-1.5rem]">
+                <button type="submit" id="submitBtn" disabled
+                  class="w-full py-4 rounded-xl bg-indigo-600 text-white font-bold text-lg hover:bg-indigo-700 disabled:bg-slate-300 dark:disabled:bg-slate-700 disabled:cursor-not-allowed transition-all shadow-lg shadow-indigo-500/30 hover:shadow-xl hover:shadow-indigo-500/40 mb-6">
+                  문의하기
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
   </div>
 
