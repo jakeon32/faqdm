@@ -119,39 +119,45 @@
       </h2>
 
       <!-- Category Filter Pills -->
-      <div class="mb-8 -mx-4 px-4 overflow-x-auto scrollbar-hide">
-        <div
-          class="flex gap-2 pb-2 min-w-max relative rounded-full bg-slate-100 dark:bg-slate-800/50 p-1.5 backdrop-blur-sm mx-1"
-          id="categoryContainer">
-          <!-- Sliding Pill -->
-          <div id="categoryPill"
-            class="absolute top-1.5 bottom-1.5 bg-indigo-600 rounded-full shadow-md transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] z-0">
-          </div>
+      <div class="relative group">
+        <div class="mb-8 -mx-4 px-4 overflow-x-auto scrollbar-hide">
+          <div
+            class="flex gap-2 pb-2 min-w-max relative rounded-full bg-slate-100 dark:bg-slate-800/50 p-1.5 backdrop-blur-sm mx-1"
+            id="categoryContainer">
+            <!-- Sliding Pill -->
+            <div id="categoryPill"
+              class="absolute top-1.5 bottom-1.5 bg-indigo-600 rounded-full shadow-md transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] z-0">
+            </div>
 
-          <button onclick="filterCategory(this, 'all')" data-category="all"
-            class="category-btn relative z-10 px-6 py-2.5 rounded-full text-sm font-bold transition-colors duration-300 whitespace-nowrap text-white">
-            <i class="fas fa-list mr-1.5"></i>전체
-          </button>
-          <button onclick="filterCategory(this, 'reservation')" data-category="reservation"
-            class="category-btn relative z-10 px-6 py-2.5 rounded-full text-sm font-bold transition-colors duration-300 whitespace-nowrap text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
-            <i class="fas fa-ticket-alt mr-1.5"></i>예약
-          </button>
-          <button onclick="filterCategory(this, 'refund')" data-category="refund"
-            class="category-btn relative z-10 px-6 py-2.5 rounded-full text-sm font-bold transition-colors duration-300 whitespace-nowrap text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
-            <i class="fas fa-credit-card mr-1.5"></i>취소/환불
-          </button>
-          <button onclick="filterCategory(this, 'qr')" data-category="qr"
-            class="category-btn relative z-10 px-6 py-2.5 rounded-full text-sm font-bold transition-colors duration-300 whitespace-nowrap text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
-            <i class="fas fa-qrcode mr-1.5"></i>QR
-          </button>
-          <button onclick="filterCategory(this, 'operation')" data-category="operation"
-            class="category-btn relative z-10 px-6 py-2.5 rounded-full text-sm font-bold transition-colors duration-300 whitespace-nowrap text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
-            <i class="fas fa-bus mr-1.5"></i>이용방법
-          </button>
-          <button onclick="filterCategory(this, 'other')" data-category="other"
-            class="category-btn relative z-10 px-6 py-2.5 rounded-full text-sm font-bold transition-colors duration-300 whitespace-nowrap text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
-            <i class="fas fa-ellipsis-h mr-1.5"></i>기타
-          </button>
+            <button onclick="filterCategory(this, 'all')" data-category="all"
+              class="category-btn relative z-10 px-6 py-2.5 rounded-full text-sm font-bold transition-colors duration-300 whitespace-nowrap text-white">
+              <i class="fas fa-list mr-1.5"></i>전체
+            </button>
+            <button onclick="filterCategory(this, 'reservation')" data-category="reservation"
+              class="category-btn relative z-10 px-6 py-2.5 rounded-full text-sm font-bold transition-colors duration-300 whitespace-nowrap text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
+              <i class="fas fa-ticket-alt mr-1.5"></i>예약
+            </button>
+            <button onclick="filterCategory(this, 'refund')" data-category="refund"
+              class="category-btn relative z-10 px-6 py-2.5 rounded-full text-sm font-bold transition-colors duration-300 whitespace-nowrap text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
+              <i class="fas fa-credit-card mr-1.5"></i>취소/환불
+            </button>
+            <button onclick="filterCategory(this, 'qr')" data-category="qr"
+              class="category-btn relative z-10 px-6 py-2.5 rounded-full text-sm font-bold transition-colors duration-300 whitespace-nowrap text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
+              <i class="fas fa-qrcode mr-1.5"></i>QR
+            </button>
+            <button onclick="filterCategory(this, 'operation')" data-category="operation"
+              class="category-btn relative z-10 px-6 py-2.5 rounded-full text-sm font-bold transition-colors duration-300 whitespace-nowrap text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
+              <i class="fas fa-bus mr-1.5"></i>이용방법
+            </button>
+            <button onclick="filterCategory(this, 'other')" data-category="other"
+              class="category-btn relative z-10 px-6 py-2.5 rounded-full text-sm font-bold transition-colors duration-300 whitespace-nowrap text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
+              <i class="fas fa-ellipsis-h mr-1.5"></i>기타
+            </button>
+          </div>
+        </div>
+        <!-- Mobile Scroll Hint Gradient -->
+        <div
+          class="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-slate-50 dark:from-slate-950 to-transparent pointer-events-none md:hidden">
         </div>
       </div>
 
@@ -265,7 +271,8 @@
                   class="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center flex-shrink-0 mt-1">
                   <span class="text-indigo-600 dark:text-indigo-400 font-black text-sm">Q</span>
                 </div>
-                <span class="font-bold text-base md:text-lg text-slate-800 dark:text-slate-100">예약인원 부분 취소 가능한가요</span>
+                <span class="font-bold text-base md:text-lg text-slate-800 dark:text-slate-100">예약인원 부분 취소
+                  가능한가요</span>
               </div>
               <i class="fas fa-chevron-down text-indigo-600 dark:text-indigo-400 transition-transform duration-300"></i>
             </button>
@@ -287,7 +294,8 @@
                   class="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center flex-shrink-0 mt-1">
                   <span class="text-indigo-600 dark:text-indigo-400 font-black text-sm">Q</span>
                 </div>
-                <span class="font-bold text-base md:text-lg text-slate-800 dark:text-slate-100">왕복예약 후 정상취소 가능시간 안에 편도만
+                <span class="font-bold text-base md:text-lg text-slate-800 dark:text-slate-100">왕복예약 후 정상취소 가능시간 안에
+                  편도만
                   취소가능한가요?</span>
               </div>
               <i class="fas fa-chevron-down text-indigo-600 dark:text-indigo-400 transition-transform duration-300"></i>
@@ -490,6 +498,7 @@
             </form>
           </div>
         </div>
+
       </div>
     </div>
 
